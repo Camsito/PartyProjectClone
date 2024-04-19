@@ -1,0 +1,10 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>forgotPass</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <input type="email" [(ngModel)]="email" placeholder="Correo electrónico">
+    <button (click)="onSubmit()" type="submit">Enviar</button>
+</ion-content>

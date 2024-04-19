@@ -1,0 +1,57 @@
+#top-header {
+  width: 100%;
+  text-align: center;
+}
+
+img{
+  position: absolute;
+  right: 24%;
+  width: 65%;
+}
+
+
+#body {
+  background-image: url(../../assets/party.jpg);
+  --background: transparent;
+  background-size: 200vw;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+ion-input {
+  width: 100%;
+  --background: transparent;
+  box-shadow: inset;
+}
+
+ion-item {
+  --background: transparent;
+  backdrop-filter: blur(80px);
+  border-radius: 50px;
+  border: none;
+  margin-bottom: -2px;
+}
+
+.frgt {
+  text-align: center;
+  cursor: pointer;
+}
+
+ion-card {
+  --background: transparent;
+  width: 80%;
+  height: 40%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  place-items: center;
+  border: none;
+  box-shadow: none;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "ProjectParty2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

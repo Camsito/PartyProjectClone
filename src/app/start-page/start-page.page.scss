@@ -1,0 +1,63 @@
+*{
+  color:aliceblue;
+}
+
+ion-content{
+  background-image: url(../../assets/Start-page.jpg);
+  --background: transparent;
+  background-size: 300vw;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.item{
+  width: 100%;
+  --background:transparent;
+  --border-color: transparent;
+}
+
+
+.card{
+  width: 100%;
+  margin: 2px;
+  border-radius: 50px;
+  backdrop-filter: blur(90px);
+}
+
+.button{
+  align-self: flex-end;
+}
+
+.content{
+  width: 100%;
+  margin: 1%;
+}
+.events{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.anfitrion{
+  display: grid;
+}
+
+.date-ev{
+  position: absolute;
+  top: 54px;
+  right: 30px;
+}
+
+.music-Style{
+display: grid;
+}
+
+.comuna{
+  position: absolute;
+  bottom: 13.1%;
+}
+
+.aporte{
+  position: absolute;
+  top: 44%;
+  right: 30px;
+}

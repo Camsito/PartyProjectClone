@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mis Eventos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="misEventos.length > 0">
+    <ion-item *ngFor="let evento of misEventos">
+      <ion-label>
+        <h2>{{ evento.title }}</h2>
+        <p>Anfitrión: {{ evento.name }}</p>
+        <p>Fecha: {{ evento.date }}, {{ evento.time }}</p>
+        <!-- Agrega más campos según sea necesario -->
+      </ion-label>
+      <ion-button (click)="obtenerInvitados(evento.id)">
+        Ver Invitados
+      </ion-button>
+
+      <ion-button (click)="deleteEvent(evento.id)">Eliminar</ion-button>
+
+    </ion-item>
+  </ion-list>
+
+  <ion-note *ngIf="misEventos.length === 0">
+    No tienes eventos creados.
+  </ion-note>
+</ion-content>

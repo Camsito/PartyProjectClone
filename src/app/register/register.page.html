@@ -1,0 +1,28 @@
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <ion-card>
+    <!-- Nombre de pila -->
+      <ion-input label="Nombre de pila" label-placement="floating" fill="outline" type="user" [(ngModel)]="name" placeholder="Ingresa tu nombre real"/>
+    <!-- Direccion -->
+      <ion-input label="Direccion" label-placement="floating" fill="outline" type="user" [(ngModel)]="direccion" placeholder="Ingresa su direccion"/>
+    <!-- Comuna -->
+    <ion-input label="Comuna" label-placement="floating" fill="outline" type="user" [(ngModel)]="comuna" placeholder="Seleccione su comuna"/>
+    <!-- Telefono -->
+      <ion-input label="Telefono" label-placement="floating" fill="outline" type="user" [(ngModel)]="telefono" placeholder="Ingresa su telefono celular"/>
+    <!-- Correo -->
+      <ion-input label="Correo" label-placement="floating" fill="outline" placeholder="Ingresa tu correo" type="user" [(ngModel)] = "email"/>
+    <!-- Contraseña -->
+      <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Ingresa tu Contraseña" type="password" [(ngModel)] = "password"/>
+    <!-- Repeticion de contraseña -->
+      <ion-input label="Repite tu contraseña" label-placement="floating" fill="outline" placeholder="Repite tu Contraseña" type="password" [(ngModel)]="repeatPass"/>
+    </ion-card>
+    <div>
+      <ion-button fill="outline" (click)="onSubmit()">Registrarme</ion-button>
+    </div>
+    <div>
+      <ion-button (click)="back()">Volver</ion-button>
+    </div>
+  </div>
+</ion-content>
+
+

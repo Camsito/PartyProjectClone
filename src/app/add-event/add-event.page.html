@@ -1,0 +1,172 @@
+<ion-content [fullscreen]="true">
+  <div id="containers">
+    <h2>Detalles del usuario</h2>
+  
+      <ion-input
+        label="Anfitrion"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="name"
+        required
+        disabled
+      />
+    
+  
+      <ion-input
+        label="Correo Anfitrion"
+        label-placement="floating"
+        fill="outline"
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+        disabled
+      />
+    
+  
+      <ion-input
+        label="Direccion del evento"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+        id="direccion"
+        name="direccion"
+        [(ngModel)]="direccion"
+        required
+        disabled
+      />
+    
+  
+      <ion-input
+        label="Comuna del evento"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+        id="comuna"
+        name="comuna"
+        [(ngModel)]="comuna"
+        required
+        disabled
+      />
+    
+  
+      <ion-input
+        label="Telefono del anfitrion"
+        label-placement="floating"
+        fill="outline"
+        type="tel"
+        id="telefono"
+        name="telefono"
+        [(ngModel)]="telefono"
+        required
+        disabled
+      />
+    
+
+    <h2>Detalles del evento</h2>
+  
+      <ion-input
+        label="Nombre del evento"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+        id="title"
+        name="title"
+        [(ngModel)]="title"
+        placeholder="Ingresa el nombre de tu evento"
+        required
+      />
+    
+  
+      <ion-input
+        label="Fecha del evento"
+        label-placement="floating"
+        fill="outline"
+        type="date"
+        id="date"
+        name="date"
+        [(ngModel)]="date"
+        placeholder="Selecciona la fecha de tu evento"
+        required
+      />
+    
+  
+      <ion-input
+        label="Hora del evento"
+        label-placement="floating"
+        fill="outline"
+        type="time"
+        id="time"
+        name="time"
+        [(ngModel)]="time"
+        required
+      />
+    
+  
+      <ion-input
+        label="Estilo de musica"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+        id="estiloDeMusica"
+        name="estiloDeMusica"
+        [(ngModel)]="estiloDeMusica"
+        required
+      />
+    
+  
+      <ion-input
+        label="Maximo de invitados"
+        label-placement="floating"
+        fill="outline"
+        type="number"
+        id="limiteDePersonas"
+        name="limiteDePersonas"
+        [(ngModel)]="limiteDePersonas"
+        required
+      />
+    
+    <!-- Modificar de aqui para abajo -->
+    
+<ion-input label="Ingresa tus reglas" label-placement="floating"></ion-input>    
+    <!-- Realizar la seleccion de reglas al final -->
+    <!-- Limite de edad -->
+  
+      <ion-item>
+        <ion-select label="Limite de Edad" label-placement="floating" [(ngModel)]="limiteDeEdad" type="number">
+          <ion-select-option *ngFor="let option of edadOptions" [value]="option.value">
+            {{ option.label }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    
+    <!-- Aporte minimo -->
+  
+      <ion-input
+      label="Aporte minimo" label-placement="floating"
+        type="number"
+        id="aporteMinimo"
+        name="aporteMinimo"
+        [(ngModel)]="aporteMinimo"
+        required
+      />
+    
+    <!-- Cantidad de acompañantes -->
+  
+      <ion-input
+      label="Cantidad de acompañantes" label-placement="floating"
+        type="number"
+        id="numeroDeAcompanantes"
+        name="numeroDeAcompanantes"
+        [(ngModel)]="numeroDeAcompanantes"
+        required
+      />
+    
+    <ion-button (click)="onSubmit()" type="submit">Crear Evento</ion-button>
+    <ion-button (click)="onBack()" >Volver</ion-button>
+  </div>
+</ion-content>

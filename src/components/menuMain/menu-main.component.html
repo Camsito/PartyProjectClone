@@ -1,0 +1,37 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-searchbar></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-icon
+        (click)="cerrarMenu()"
+        slot="start"
+        name="arrow-back"
+        id="arrow-back"
+      ></ion-icon>
+      <ion-label>Menu</ion-label>
+    </ion-toolbar>
+  </ion-header>
+  
+  <div class="logo-Menu">
+    <ion-img src="../../../assets/7.png" />
+  </div>
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-menu-toggle *ngFor="let item of menuItems">
+        <ion-item (click)="irA(item.destination)">
+          <ion-icon slot="start" [name]="item.icon"></ion-icon>
+          <ion-label (click)="item.label">{{ item.label }}</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-router-outlet class="ion-page" id="main-content"></ion-router-outlet>

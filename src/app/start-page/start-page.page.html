@@ -1,0 +1,43 @@
+<app-menu-main></app-menu-main>
+
+<ion-content >
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-item class="item" *ngFor="let evento of eventos">
+    <ion-card-header [style.background-color]="evento.color" class="card" >
+      <div class="content">
+        <div class="events">
+        <ion-card-title class="anfitrion">Evento: {{ evento.title }}</ion-card-title>
+      </div>
+        <ion-card-subtitle class="anfitrion">Anfitrion: {{ evento.name }}</ion-card-subtitle>
+        <ion-card-subtitle class="music-Style">Estilo de musica: {{ evento.estiloDeMusica }}</ion-card-subtitle>
+      </div>
+      <div class="content">
+        <ion-card-subtitle class="date-ev">Fecha: {{evento.date}}, {{evento.time}}</ion-card-subtitle>
+        <ion-card-subtitle class="aporte">Aporte: {{ evento.aporteMinimo}}</ion-card-subtitle>
+      </div>
+      <div class="content">
+        <ion-card-subtitle class="comuna">Comuna: {{ evento.comuna }}</ion-card-subtitle>
+      </div>
+      <div class="button">
+        <ion-button size="small" (click)="Attendo(evento)">¡Voy de una!</ion-button>
+        <ion-button shape="round" (click)="nuntiare()" size="small"><ion-icon name="alert-circle"></ion-icon></ion-button>
+      </div>
+    </ion-card-header>
+  </ion-item>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon name="add" (click)="addevent()"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="home" (click)="myEvent()"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

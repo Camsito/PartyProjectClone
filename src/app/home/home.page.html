@@ -1,0 +1,50 @@
+<ion-content id="body" [fullscreen]="true">
+  <div id="top-header">
+    <div class="logo">
+      <img src="../../assets/7.png"/>
+    </div>
+  </div>
+  <div id="container">
+    <ion-card>
+      <ion-item>
+        <ion-input
+          label="Correo"
+          label-placement="floating"
+          placeholder="Ingresa tu correo"
+          type="user"
+          [(ngModel)]="email"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          label="Contraseña"
+          label-placement="floating"
+          placeholder="Ingresa tu Contraseña"
+          type="password"
+          [(ngModel)]="password"
+          required
+        ></ion-input>
+      </ion-item>
+      <div>
+        <ion-button fill="outline" shape="round" (click)="onSubmit()"
+          >Login</ion-button
+        >
+      </div>
+
+      <div class="frgt">
+        <ion-button size="small" shape="round" (click)="navigateAccount()"
+          >Create Account</ion-button
+        >
+      </div>
+
+      <div class="frgt">
+        <a (click)="navigateForgot()">Forgot Password?</a>
+      </div>
+      <!-- <ion-button (click)="startpage()">Start Page</ion-button>
+      <ion-button (click)="myevent()">My Event</ion-button> -->
+    </ion-card>
+  </div>
+</ion-content>
+
