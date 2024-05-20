@@ -14,12 +14,14 @@ import { environment } from '../environments/environment';
 import { DatePipe } from '@angular/common';
 import { ComponentsModule } from 'src/components/components.module';
 import { AuthLogGuard } from 'src/guard/authLog/auth-log.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(environment.firebase),ComponentsModule,
     AngularFirestoreModule,
-    AngularFireAuthModule,],
+    AngularFireAuthModule, HttpClientModule
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },DatePipe,AuthLogGuard],
   bootstrap: [AppComponent],
 })

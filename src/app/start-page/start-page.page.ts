@@ -5,6 +5,8 @@ import { getFirestore, collection, doc, addDoc, FirestoreError, getDoc, getDocs,
 import { getAuth } from 'firebase/auth';
 import { map } from 'rxjs/operators';
 import { AlertController, ToastController } from '@ionic/angular';
+import { GeocodingService } from 'src/Service/Geoencoder/geocoding.service';
+import { WhatsappService } from 'src/Service/Whatsapp/whatsapp.service';
 
 @Component({
   selector: 'app-start-page',
@@ -18,12 +20,15 @@ export class StartPagePage implements OnInit {
   invitadoName= '';
   eventId:any ;
   anfiId = '';
+  userPhone='';
 
   constructor(
     private firestore: AngularFirestore,
     private router: Router,
     private alertController: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private geocodingService: GeocodingService,
+    private whatsappService: WhatsappService
   ) {}
 
   ngOnInit() {
@@ -32,6 +37,7 @@ export class StartPagePage implements OnInit {
      this.getUserInfo(uid).then((info: any) => {
       this.userIds = uid;
       this.invitadoName = info.name
+      this.userPhone =info.phone_number
     });
     }
 
@@ -100,23 +106,20 @@ export class StartPagePage implements OnInit {
       const yaEstaEnLaLista = invitadosSnapshot.docs.some(doc => doc.data()['Invitado'] === userId);
   
       if (yaEstaEnLaLista) {
-        this.showAlert('Aviso','Ya estás en la lista de invitados.');
-        
+        this.showAlert('Aviso', 'Ya estás en la lista de invitados.');
       } else {
-        // Obtener información del evento
+        // Obtener información del evento, incluyendo la comuna
         getDoc(doc(collection(getFirestore(), 'events'), eventoId))
         .then((eventSnapshot) => {
           if (eventSnapshot.exists()) {
             const eventoCompleto = eventSnapshot.data();
             const anfitrionId = eventoCompleto['userId'];
+            const direccion = eventoCompleto['direccion']; // Obtener la dirección del evento
+            const comuna = eventoCompleto['comuna']; // Obtener la comuna del evento
+            const address = `${direccion}, ${comuna}`; // Concatenar la dirección y la comuna
   
-            //Eliminar esto al terminar esta pagina
-            
-            console.log('Evento ID:', eventoId);
-            console.log('Anfitrión ID (userId):', anfitrionId);
-            console.log('User ID:', userId);
-            console.log('User Name: ', this.invitadoName);
-  
+            console.log('Dirección completa del evento:', address); // Mostrar la dirección completa en la consola
+            this.showAlert('Aviso', 'Seras dirigido a google maps');
             const listaInvitados = {
               Invitado: userId,
               invitado: this.invitadoName,
@@ -128,12 +131,15 @@ export class StartPagePage implements OnInit {
               // Agregar al usuario a la lista de invitados
               addDoc(invitadosCollectionRef, listaInvitados)
                 .then((docRef) => {
-                  this.showAlert('Aviso','Haz sido incluido en la lista de invitados.');
-                  
+                  this.showAlert('Aviso', 'Haz sido incluido en la lista de invitados.');
+                  this.showAlert2('Aviso', '¿Deseas ser agregado a un grupo de whatsapp en donde se mostrara tu numero de celular?');
+                  this.showAlert('aviso', 'nombre: '+ this.invitadoName);
+                  // Abrir la dirección en Google Maps
+                  this.openLocationInMaps(address);
                 })
                 .catch((error: FirestoreError) => {
                   console.error('Error al agregar:', error);
-                  this.showAlert('Error','Error al agregar');
+                  this.showAlert('Error', 'Error al agregar');
                 });
             } else {
               //Poner mensaje temporal
@@ -149,6 +155,7 @@ export class StartPagePage implements OnInit {
       }
     });
   }
+  
   
   
 
@@ -185,6 +192,30 @@ nuntiare(){
 
     await alert.present();
   }
+  async showAlert2(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel', // Esto cierra el alerta cuando se hace clic en este botón
+          handler: () => {
+            console.log('No clickeado');
+          }
+        },
+        {
+          text: 'Sí',
+          handler: () => {
+            console.log('Sí clickeado');
+            // Puedes agregar aquí la lógica que desees ejecutar cuando se haga clic en el botón "Sí"
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
 
   async mostrarMensaje(mensaje: string, duration: number = 2000, position: 'top' | 'bottom' | 'middle' = 'top', color: string = 'primary') {
     const toast = await this.toastController.create({
@@ -194,5 +225,20 @@ nuntiare(){
       color, 
     });
     toast.present();
+  }
+
+
+  openLocationInMaps(address: string) {
+    this.geocodingService.getCoordinates(address).subscribe((data: any) => {
+      if (data && data.results && data.results.length > 0 && data.results[0].geometry) {
+        const location = data.results[0].geometry.location;
+        const latitude = location.lat;
+        const longitude = location.lng;
+        window.open(`https://www.google.com/maps?q=${latitude},${longitude}`, '_system');
+      } else {
+        console.error('No se pudo obtener la ubicación desde la API de geocodificación de Google Maps');
+        // Puedes mostrar un mensaje de error o manejar el caso de error de alguna otra manera
+      }
+    });
   }
 }
